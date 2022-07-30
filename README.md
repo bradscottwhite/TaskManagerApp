@@ -6,6 +6,9 @@
 
 <img width="1440" alt="Another picture of task manager app" src="https://user-images.githubusercontent.com/97484878/181681770-6507e5c3-2332-459c-90f8-e9c652ba18ff.png">
 
+<img width="1440" alt="Another picture of task manager app" src="https://user-images.githubusercontent.com/97484878/181871066-1e8450a7-6e03-4ca4-b85f-aa186bf604ac.png">
+
+
 
 ###### Requirements:
 - Java SDK 18
