@@ -1,9 +1,22 @@
 import React, { useState } from 'react'
 
+/**
+ * Displays task with checkbox
+ * @param {object} task
+ * @param {method} taskToggle
+ * @param {method} taskUpdate
+ * @param {number} i
+ * @returns {jsx}
+ */
 export default ({ task, taskToggle, taskUpdate, i }) => {
     const [ edit, setEdit ] = useState(false)
     const [ text, setText ] = useState(task.task)
 
+    /**
+     * Checks if enter key is pressed and if so it updates task and resets it
+     * @param {object} e 
+     * @returns {void}
+     */
     const ifEnterPressed = e => {
         if (e.key === 'Enter') {
             taskUpdate(task, e.target.value)

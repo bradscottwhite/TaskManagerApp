@@ -5,6 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Getter and setter methods for tasks
+ * @author Brad White
+ * @date 7-2022
+ */
 @Entity
 public class Task {
     @Id

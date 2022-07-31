@@ -1,6 +1,14 @@
 import React from 'react'
 import Task from './Task'
 
+/**
+ * Displays tasks and delete button
+ * @param {object} tasks
+ * @param {method} taskToggle
+ * @param {method} taskFilter
+ * @param {method} taskUpdate
+ * @returns {jsx}
+ */
 export default ({ tasks, taskToggle, taskFilter, taskUpdate }) => {
     return (
         <div className="bg-blue-300 p-10 items-center">

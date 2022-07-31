@@ -1,8 +1,18 @@
 import React, { useState } from 'react'
 
+/**
+ * Displays form to add task
+ * @param {method} addTask
+ * @returns {jsx}
+ */
 export default ({ addTask }) => {
     const [ task, setTask ] = useState('')
 
+    /**
+     * Calls method to add task and resets form
+     * @param {object} e
+     * @returns {void}
+     */
     const handleSubmit = e => {
         addTask(task)
         setTask('')

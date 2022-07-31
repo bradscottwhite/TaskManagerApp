@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
+/**
+ * Contains all of the rest routes to call the methods that access and manipulate tasks in the db
+ * @author Brad White
+ * @date 7-2022
+ */
 @RestController
 @RequestMapping("/task")
 @CrossOrigin
@@ -26,20 +31,39 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    // Add task:
+    /**
+     * Adds a task to the db
+     * @param {Task} task to add
+     * @return a confirmation string
+     * @example
+     * User calls `.../task/add` with PUT method and json in body
+     */
     @PostMapping("/add")
-    public String add(@RequestBody Task task) {
+    public String add(
+        @RequestBody Task task
+    ) {
         taskService.saveTask(task);
         return "New task added";
     }
     
-    // Get all tasks:
+    /**
+     * Gets and returns all tasks from db
+     * @return all tasks from db
+     * @example
+     * User calls `.../task/getAll` with GET method
+     */
     @GetMapping("/getAll")
     public List<Task> getAllTask() {
         return taskService.getAllTasks();
     }
 
-    // Get task by id:
+    /**
+     * Gets task by id from db if found
+     * @param {int} id
+     * @return task data
+     * @example
+     * User calls `.../task/5` with GET method to retrive task with id 5
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Task> get(
         @PathVariable int id
@@ -52,7 +76,14 @@ public class TaskController {
         }
     }
 
-    // Update task by id:
+    /**
+     * Updates task in db by id
+     * @param {Task} task - data to update existing task
+     * @param {int} id - id of task to update
+     * @return successful or unsuccessful Http response
+     * @example
+     * User calls `.../task/4` with PUT method and json in body to update task number 4
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Task> update(
         @RequestBody Task task,
@@ -68,9 +99,17 @@ public class TaskController {
         }
     }
 
-    // Delete task by id:
+    /**
+     * Deletes task in db by id
+     * @param {int} id - id of task to delete
+     * @return comfirmation string
+     * @example
+     * User calls `.../task/7` with DELETE method to delete task number 7
+     */
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(
+        @PathVariable int id
+    ) {
         taskService.delete(id);
         return "Deleted task with id " + id;
     }
