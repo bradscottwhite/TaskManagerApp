@@ -7,61 +7,63 @@ function App() {
   const [ tasks, setTasks ] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:8080/task/getAll")
-      .then(res => res.json())
-      .then(res => setTasks(res))
+    const fetchData = async () => {
+      const data = await fetch("http://localhost:8080/task/getAll")
+      const json = await data.json()
+      setTasks(json)
+    }
+    fetchData()
   }, [ tasks ])
 
-  const taskToggle = task => 
-    fetch("http://localhost:8080/task/" + task.id, {
+  const taskToggle = async task => 
+    await fetch("http://localhost:8080/task/" + task.id, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: task.id, task: task.task, checked: task.checked ? 0 : 1 })
     })
 
   const taskFilter = () => {
-    tasks.map(task => {
-      if (task.checked == 1)
-        fetch("http://localhost:8080/task/" + task.id, {
-          method: "DELETE"
-        })
-          .then(() => {
-            console.log(`Task ${task.id} deleted`)
-          })
-    
-      if (task.id == tasks[tasks.length - 1].id)
-        fetch("http://localhost:8080/task/getAll")
-          .then(res => res.json())
-          .then(res => setTasks(res))
-      
-          setTasks([])
+    tasks.map((task, i) => {
+      if (task.checked == 1) {
+        const delTask = async () => {
+          fetch("http://localhost:8080/task/" + task.id, { method: "DELETE" })
+          console.log(`Task ${task.id} deleted`)
+        }
+        delTask()
+        const newTasks = tasks
+        newTasks.splice(i, 1)
+        setTasks(newTasks)
+      }
     })
   }
     
-  const taskUpdate = (task, newText) =>
-    fetch("http://localhost:8080/task/" + task.id, {
+  const taskUpdate = (task, newText) => {
+    const update = async () => {
+      await fetch("http://localhost:8080/task/" + task.id, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            id: task.id,
-            task: newText,
-            checked: task.checked})
-    })
-        .then(() => {
-            console.log(`Task ${task.id} updated`)
-        })
+          id: task.id,
+          task: newText,
+          checked: task.checked})
+      })
+      console.log(`Task ${task.id} updated`)
+    }
+    update()
+  }
 
   const addTask = task => {
-    fetch("http://localhost:8080/task/add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        task, checked: 0
+    const add = async () => {
+      await fetch("http://localhost:8080/task/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          task, checked: 0
+        })
       })
-    })
-      .then(() => {
-        console.log("New task added")
-      })
+      console.log("New task added")
+    }
+    add()
   }
 
   return (

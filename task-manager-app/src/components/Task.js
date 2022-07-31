@@ -24,7 +24,7 @@ export default ({ task, taskToggle, taskUpdate }) => {
             <input
                 type="checkbox"
                 checked={task.checked}
-                onClick={e => taskToggle(task)}
+                onChange={e => taskToggle(task)}
                 className="form-check-input appearance-none h-4 w-4 border mt-1.5 border-gray-400 rounded-sm bg-gray-200 checked:bg-red-600 checked:border-red-700 focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain cursor-pointer"
             />
             <label
