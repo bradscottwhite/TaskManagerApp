@@ -4,12 +4,12 @@ import Task from './Task'
 /**
  * Displays tasks and delete button
  * @param {object} tasks
- * @param {method} taskToggle
+ * @param {method} toggleTask
  * @param {method} taskFilter
- * @param {method} taskUpdate
+ * @param {method} updateTask
  * @returns {jsx}
  */
-export default ({ tasks, taskToggle, taskFilter, taskUpdate }) => {
+export default ({ tasks, toggleTask, taskFilter, updateTask }) => {
     return (
         <div className="bg-blue-300 p-10 items-center">
             <div className="block w-2/5 p-10 shadow-md bg-gray-300 mx-auto rounded-md items-center">
@@ -17,8 +17,8 @@ export default ({ tasks, taskToggle, taskFilter, taskUpdate }) => {
                     {tasks.map((task, i) => (
                         <Task
                             task={task}
-                            taskToggle={taskToggle}
-                            taskUpdate={taskUpdate}
+                            toggleTask={toggleTask}
+                            updateTask={updateTask}
                             index={i}
                         />
                     ))}

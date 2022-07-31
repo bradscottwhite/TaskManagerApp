@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 /**
  * Displays task with checkbox
  * @param {object} task
- * @param {method} taskToggle
- * @param {method} taskUpdate
+ * @param {method} toggleTask
+ * @param {method} updateTask
  * @param {number} i
  * @returns {jsx}
  */
-export default ({ task, taskToggle, taskUpdate, i }) => {
+export default ({ task, toggleTask, updateTask, i }) => {
     const [ edit, setEdit ] = useState(false)
     const [ text, setText ] = useState(task.task)
 
@@ -19,7 +19,7 @@ export default ({ task, taskToggle, taskUpdate, i }) => {
      */
     const ifEnterPressed = e => {
         if (e.key === 'Enter') {
-            taskUpdate(task, e.target.value)
+            updateTask(task, e.target.value)
             setEdit(!edit)
             setText(e.target.value)
         }
@@ -37,7 +37,7 @@ export default ({ task, taskToggle, taskUpdate, i }) => {
             <input
                 type="checkbox"
                 checked={task.checked}
-                onChange={e => taskToggle(task)}
+                onChange={e => toggleTask(task)}
                 className="form-check-input appearance-none h-4 w-4 border mt-1.5 border-gray-400 rounded-sm bg-gray-200 checked:bg-red-600 checked:border-red-700 focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain cursor-pointer"
             />
             <label
