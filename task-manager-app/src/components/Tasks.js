@@ -6,11 +6,12 @@ export default ({ tasks, taskToggle, taskFilter, taskUpdate }) => {
         <div className="bg-blue-300 p-10 items-center">
             <div className="block w-2/5 p-10 shadow-md bg-gray-300 mx-auto rounded-md items-center">
                 <div className="flex flex-col items-center">
-                    {tasks.map(task => (
+                    {tasks.map((task, i) => (
                         <Task
                             task={task}
                             taskToggle={taskToggle}
                             taskUpdate={taskUpdate}
+                            index={i}
                         />
                     ))}
                 </div>

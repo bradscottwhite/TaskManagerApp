@@ -22,20 +22,25 @@ function App() {
       body: JSON.stringify({ id: task.id, task: task.task, checked: task.checked ? 0 : 1 })
     })
 
-  const taskFilter = () => {
-    tasks.map((task, i) => {
-      if (task.checked == 1) {
-        const delTask = async () => {
-          fetch("http://localhost:8080/task/" + task.id, { method: "DELETE" })
-          console.log(`Task ${task.id} deleted`)
+  const taskFilter = () => //{
+    setTasks(
+      tasks.filter((task, i) => {
+        if (task.checked == 1) {
+          const delTask = async () => {
+            fetch("http://localhost:8080/task/" + task.id, { method: "DELETE" })
+            console.log(`Task ${task.id} deleted`)
+          }
+          delTask()
+          return false
+          //setTasks(tasks.filter((el, taskIndex) => taskIndex !== i))
+          /*const newTasks = tasks.slice()
+          newTasks.splice(i, 1)
+          setTasks(newTasks)*/
         }
-        delTask()
-        const newTasks = tasks
-        newTasks.splice(i, 1)
-        setTasks(newTasks)
-      }
-    })
-  }
+      })
+    )
+    //setTasks()
+  //}
     
   const taskUpdate = (task, newText) => {
     const update = async () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default ({ task, taskToggle, taskUpdate }) => {
+export default ({ task, taskToggle, taskUpdate, i }) => {
     const [ edit, setEdit ] = useState(false)
     const [ text, setText ] = useState(task.task)
 
@@ -15,7 +15,7 @@ export default ({ task, taskToggle, taskUpdate }) => {
     return (
         <div
             id={task.id}
-            key={task.id + task.task}
+            key={i}
             className="bg-gray-200 font-sans container rounded-lg shadow-lg mb-4 text-xl font-medium text-slate-700 py-4 px-8"
         >
             <span className="px-3">
