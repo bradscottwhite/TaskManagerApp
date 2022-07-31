@@ -6,19 +6,18 @@ import AddTask from './components/AddTask'
 export default () =>  {
   const [ tasks, setTasks ] = useState([])
 
-  useEffect(() => {
-    /**
-     * Fetchs data from rest api and puts it into the `tasks` state
-     * @async
-     * @returns {void}
-     */
-    const fetchData = async () => {
-      const data = await fetch("http://localhost:8080/task/getAll")
-      const json = await data.json()
-      setTasks(json)
-    }
-    fetchData()
-  }, [ tasks ])
+  /**
+   * Fetchs data from rest api and puts it into the `tasks` state
+   * @async
+   * @returns {void}
+   */
+  const fetchTasks = async () => {
+    const data = await fetch("http://localhost:8080/task/getAll")
+    const json = await data.json()
+    setTasks(json)
+  }
+
+  useEffect(() => { fetchTasks() }, [ tasks ])
 
   /**
    * Updates a task in the db to flip its checked property
@@ -37,7 +36,7 @@ export default () =>  {
    * Filters thru tasks that are checked and deletes/removes them from the db and `tasks` state
    * @returns {void}
    */
-  const taskFilter = () => //{
+  const taskFilter = () =>
     setTasks(
       tasks.filter((task, i) => {
         if (task.checked == 1) {
@@ -52,15 +51,14 @@ export default () =>  {
           }
           delTask()
           return false
-          //setTasks(tasks.filter((el, taskIndex) => taskIndex !== i))
+
+          //setTasks([ ...tasks ].filter((el, taskIndex) => taskIndex !== i))
           /*const newTasks = tasks.slice()
           newTasks.splice(i, 1)
           setTasks(newTasks)*/
         }
       })
     )
-    //setTasks()
-  //}
   
   /**
    * Updates task in db
