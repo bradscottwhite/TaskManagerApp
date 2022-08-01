@@ -34,16 +34,17 @@ public class TaskController {
     /**
      * Adds a task to the db
      * @param {Task} task to add
-     * @return a confirmation string
+     * @return id of new task
      * @example
      * User calls `.../task/add` with PUT method and json in body
      */
     @PostMapping("/add")
-    public String add(
+    public int add(
         @RequestBody Task task
     ) {
         taskService.saveTask(task);
-        return "New task added";
+        return task.getId();
+        //return "New task added";
     }
     
     /**

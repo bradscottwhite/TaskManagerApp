@@ -18,10 +18,10 @@ const getTasks = async setTasks => {
  * Adds task to db
  * @async
  * @param {object} task - task to add
- * @returns {void}
+ * @returns {number} - id of new task
  */
 const addTask = async task => {
-  await fetch(url + "add", {
+  const res = await fetch(url + "add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -29,15 +29,16 @@ const addTask = async task => {
     })
   })
   console.log("New task added")
+  return parseInt(await res.text())
 }
 
 /**
  * Updates a task in the db to flip its checked property
  * @async
- * @param {object} task 
+ * @param {object} task - task to make complete
  * @returns {void}
  */
-const toggleTask = async task => 
+const toggleTask = async task =>
   await fetch(url + task.id, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },

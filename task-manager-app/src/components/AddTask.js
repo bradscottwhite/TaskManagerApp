@@ -2,19 +2,29 @@ import React, { useState } from 'react'
 
 /**
  * Displays form to add task
+ * @param {object} tasks
+ * @param {method} setTasks
  * @param {method} addTask
  * @returns {jsx}
  */
-export default ({ addTask }) => {
+export default ({ tasks, setTasks, addTask }) => {
     const [ task, setTask ] = useState('')
 
     /**
-     * Calls method to add task and resets form
+     * Calls method to add task to db, to local copy and to reset the form
      * @param {object} e
      * @returns {void}
      */
-    const handleSubmit = e => {
-        addTask(task)
+    const handleSubmit = async e => {
+        const id = await addTask(task)
+        setTasks([
+            ...tasks,
+            {
+                id: id,
+                task: task,
+                checked: 0
+            }
+        ])
         setTask('')
     }
 
